@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jordan Herring — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #12181f;
+    --bg-raised: #1a222b;
+    --text: #edeff2;
+    --text-dim: #9aa4b0;
+    --accent: #e8a33d;
+    --accent-dim: #7a5c2e;
+    --border: #2a323c;
+    --teal: #3fa796;
+    --max-width: 720px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.6;
+    font-size: 17px;
+  }
+
+  a { color: inherit; }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .wrap {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  header {
+    padding: 96px 0 64px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .mark {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 22px;
+    margin-bottom: 28px;
+  }
+
+  .mark span {
+    display: block;
+    width: 5px;
+    background: var(--accent);
+    border-radius: 1px;
+  }
+
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 2.5rem;
+    line-height: 1.15;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .role {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--accent);
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin: 0 0 24px;
+  }
+
+  .bio {
+    color: var(--text-dim);
+    max-width: 58ch;
+    margin: 0;
+  }
+
+  .bio a { color: var(--teal); text-decoration: none; border-bottom: 1px solid rgba(63,167,150,0.4); }
+  .bio a:hover { border-bottom-color: var(--teal); }
+
+  section { padding: 56px 0; border-bottom: 1px solid var(--border); }
+  section:last-of-type { border-bottom: none; }
+
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 32px;
+  }
+
+  .project {
+    display: block;
+    text-decoration: none;
+    padding: 24px;
+    margin-bottom: 16px;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    transition: border-color 0.15s ease;
+  }
+
+  .project:last-child { margin-bottom: 0; }
+
+  .project:hover, .project:focus-visible {
+    border-color: var(--accent-dim);
+  }
+
+  .project-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin: 0 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .project-title .play {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 3px 9px;
+    border-radius: 999px;
+  }
+
+  .project-desc {
+    color: var(--text-dim);
+    margin: 0 0 14px;
+    font-size: 0.96rem;
+  }
+
+  .tech {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .tech span {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 3px 9px;
+    border-radius: 4px;
+  }
+
+  .project.placeholder {
+    opacity: 0.55;
+    border-style: dashed;
+  }
+
+  .project.placeholder .project-title::after {
+    content: "Replace with a real project";
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: var(--text-dim);
+    margin-left: auto;
+  }
+
+  footer {
+    padding: 48px 0 80px;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+  }
+
+  footer a {
+    text-decoration: none;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+  }
+  footer a:hover { border-bottom-color: var(--text-dim); }
+
+  @media (max-width: 480px) {
+    header { padding: 64px 0 48px; }
+    h1 { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="mark" aria-hidden="true">
+      <span style="height: 40%;"></span>
+      <span style="height: 70%;"></span>
+      <span style="height: 55%;"></span>
+      <span style="height: 100%;"></span>
+      <span style="height: 65%;"></span>
+    </div>
+    <h1>Jordan Herring</h1>
+    <p class="role">Business Intelligence Developer / Data Engineer</p>
+    <p class="bio">
+      I build data pipelines and BI tooling by day, and tinker with small
+      browser projects on the side. This page collects a few things I've made —
+      including a game you can play right in your browser.
+    </p>
+  </header>
+
+  <section id="projects">
+    <h2>Projects</h2>
+
+    <a class="project" href="https://oregonjordan.github.io/JH_Portfolio/" target="_blank" rel="noopener">
+      <p class="project-title">Browser Game Demo <span class="play">Play in browser</span></p>
+      <p class="project-desc">A simple game built from scratch with vanilla JavaScript, HTML and CSS — no game engine, no frameworks.</p>
+      <div class="tech"><span>JavaScript</span><span>HTML</span><span>CSS</span></div>
+    </a>
+
+    <a class="project placeholder" href="#">
+      <p class="project-title">BI Dashboard Project</p>
+      <p class="project-desc">Swap this in for a dashboard, report, or data pipeline you've built — describe the problem it solved in one sentence.</p>
+      <div class="tech"><span>SQL</span><span>Power BI</span></div>
+    </a>
+
+    <a class="project placeholder" href="#">
+      <p class="project-title">Data Pipeline Project</p>
+      <p class="project-desc">Another slot for a data engineering project — an ETL pipeline, warehouse model, or automation script.</p>
+      <div class="tech"><span>Python</span><span>SQL</span></div>
+    </a>
+  </section>
+
+  <footer>
+    <p><a href="https://github.com/OregonJordan" target="_blank" rel="noopener">github.com/OregonJordan</a></p>
+  </footer>
+</div>
+
+</body>
+</html>
