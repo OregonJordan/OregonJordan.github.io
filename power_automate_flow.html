@@ -172,13 +172,41 @@
     padding: 12px;
   }
 
-  .alert-image-wrap img {
+  /* .alert-image-wrap img {
     max-width: 100%;
     height: auto;
     border-radius: 4px;
     display: block;
+  } */
+  .alert-image-wrap img {
+    cursor: zoom-in;
+    transition: opacity 0.15s ease;
+  }
+  .alert-image-wrap img:hover {
+    opacity: 0.9;
+  }
+  
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    cursor: zoom-out;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 6px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
   }
 
+
+  
   footer {
     margin-top: 8px;
     color: var(--text-dim);
@@ -235,9 +263,14 @@
   <section>
     <h2>Alert Example</h2>
     <div class="alert-image-wrap">
-      <img src="assets/alert_example.jpg" alt="Example of the automated Pulse Alert email output">
+      <!-- <img src="assets/alert_example.jpg" alt="Example of the automated Pulse Alert email output"> -->
+      <img id="alert-img" src="assets/alert_example.jpg" alt="Example of the automated Pulse Alert email output">
     </div>
   </section>
+
+  <div class="lightbox" id="lightbox">
+    <img id="lightbox-img" src="" alt="">
+  </div>
 
   <footer>Viewing on GitHub Pages — read-only, no download.</footer>
 </div>
@@ -316,8 +349,20 @@ FILTER(
 )
 ORDER BY dim_geography[geography] ASC, dim_product[Manufacturer] ASC, dim_product[Brand] ASC`;
 
-document.getElementById('dax-block').textContent = daxSource;
-hljs.highlightElement(document.getElementById('dax-block'));
+  document.getElementById('dax-block').textContent = daxSource;
+  hljs.highlightElement(document.getElementById('dax-block'));
+  
+  const alertImg = document.getElementById('alert-img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  
+  alertImg.addEventListener('click', () => {
+    lightboxImg.src = alertImg.src;
+    lightbox.classList.add('open');
+  });
+  lightbox.addEventListener('click', () => {
+    lightbox.classList.remove('open');
+  });
 </script>
 
 </body>
