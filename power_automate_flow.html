@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Power Automate Alert Flow — Jordan Herring</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/nord.min.css">
+<style>
+  :root {
+    --bg: #12181f;
+    --bg-raised: #1a222b;
+    --text: #edeff2;
+    --text-dim: #9aa4b0;
+    --accent: #e8a33d;
+    --teal: #3fa796;
+    --border: #2a323c;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.6;
+  }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+
+  a.back {
+    display: inline-block;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  a.back:hover { color: var(--text); border-bottom-color: var(--text-dim); }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 40px;
+  }
+
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.6rem;
+    margin: 0 0 10px;
+  }
+
+  .desc {
+    color: var(--text-dim);
+    margin: 0;
+    max-width: 62ch;
+  }
+
+  .tech {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+
+  .tech span {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    padding: 3px 9px;
+    border-radius: 4px;
+  }
+
+  section {
+    margin-bottom: 56px;
+  }
+
+  section h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Flow description section */
+  .flow-desc-box {
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px 28px 28px 24px;
+  }
+
+  .flow-desc-box p {
+    margin: 0 0 14px;
+    color: var(--text-dim);
+  }
+
+  .flow-desc-box ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  .flow-desc-box li {
+    margin-bottom: 8px;
+  }
+
+  .flow-desc-box li::marker {
+    color: var(--accent);
+  }
+
+  .flow-desc-box ul ul {
+    margin-top: 8px;
+  }
+
+  /* Flow diagram image section */
+  .flow-image-wrap {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .flow-image-wrap img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* DAX section */
+  .query .label {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin: 0 0 6px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  pre {
+    background: var(--bg-raised) !important;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px;
+    overflow-x: auto;
+    font-size: 0.8rem;
+    margin: 0;
+  }
+
+  code.hljs {
+    background: transparent !important;
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1.55;
+  }
+
+  /* Alert example section */
+  .alert-image-wrap {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+  }
+
+  .alert-image-wrap img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    display: block;
+  }
+
+  footer {
+    margin-top: 8px;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <a class="back" href="https://oregonjordan.github.io/">&larr; Back to portfolio</a>
+
+  <header>
+    <h1>Power Automate Alert Flow</h1>
+    <p class="desc">An automated flow that checks Power BI KPI thresholds across client assignments and sends targeted alert emails to the right managers, with results logged for archive and reporting.</p>
+    <div class="tech"><span>Power Automate</span><span>DAX</span><span>Power BI</span></div>
+  </header>
+
+  <section>
+    <h2>Flow Description</h2>
+    <div class="flow-desc-box">
+      <p>This flow is designed to do the following:</p>
+      <ul>
+        <li>Reads from a master list of clients assigned to each manager and creates the following:
+          <ul>
+            <li>Unique list of manager names and email address</li>
+            <li>Unique list of all available assigned clients by Client name, Region and Retailer</li>
+          </ul>
+        </li>
+        <li>Runs a query against the Power BI Semantic Model to retrieve YoY performance and volume KPI data for each.</li>
+        <li>Assigns KPI to each manager by merging both lists together based on desk assignments.</li>
+        <li>Builds an output email for each KPI with dynamic Power BI report links for each combination of results.</li>
+        <li>Sends emails.</li>
+        <li>Records outputs to a master record for archive and reporting.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Flow Diagram</h2>
+    <div class="flow-image-wrap">
+      <img src="assets/flow_diagram.png" alt="Power Automate flow diagram showing the full trigger-to-send sequence">
+    </div>
+  </section>
+
+  <section>
+    <h2>DAX</h2>
+    <div class="query">
+      <p class="label">KPI1 &amp; KPI4 Combined with Thresholds</p>
+      <pre><code class="language-plaintext" id="dax-block"></code></pre>
+    </div>
+  </section>
+
+  <section>
+    <h2>Alert Example</h2>
+    <div class="alert-image-wrap">
+      <img src="assets/alert_example.jpg" alt="Example of the automated Pulse Alert email output">
+    </div>
+  </section>
+
+  <footer>Viewing on GitHub Pages — read-only, no download.</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+const daxSource = String.raw`KPI1 & KPI4 combined with thresholds
+1/30/26--KPI Thresholds are included inside calculation. modify as needed
+
+EVALUATE
+FILTER(
+    CALCULATETABLE(
+        ADDCOLUMNS(
+            SUMMARIZECOLUMNS(
+                dim_geography[csp],
+                dim_geography[geography],
+                dim_product[Manufacturer],
+                dim_product[Brand]
+            ),
+            "#UnitSales", [Unit Sales],
+            "#UnitSalesYA", [Unit Sales YA],
+
+            --KPI1--
+            "#Unit%Chg13wks",
+            SWITCH(
+                TRUE(),
+                (CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 > -5 &&
+                (CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 < 5, BLANK(),
+                CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))*100
+            ),
+            "#Unit%Chg52wks",
+            SWITCH(
+                TRUE(),
+                (CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 > -5 &&
+                (CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 < 5, BLANK(),
+                CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD"))*100
+            ),
+            "#KPI_1",
+            SWITCH(
+                TRUE(),
+                (CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 > -5 &&
+                (CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 < 5, BLANK(),
+                CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD"))*100
+            ),
+
+            --KPI4--
+            "#13wk_UPSPWPctChg",
+            SWITCH(
+                TRUE(),
+                (CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 > -3 &&
+                (CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 < 3, BLANK(),
+                CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))*100
+            ),
+            "#52wk_UPSPWPctChg",
+            SWITCH(
+                TRUE(),
+                (CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 > -3 &&
+                (CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 < 3, BLANK(),
+                CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD"))*100
+            ),
+            "#KPI_4",
+            SWITCH(
+                TRUE(),
+                (CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 > -3 &&
+                (CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 < 3, BLANK(),
+                CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD"))*100
+            )
+        ),
+        dim_geography[Class] = "RMA - Food",
+        dim_period[period_type] = "13WTD",
+        dim_geography[csp] = "AdvAntage Hannaford Corp DC1", --replaced with item)?['RSO'] in flow
+        dim_geography[geography] = "Mid-Atlantic", --replaced with item)?['Geography'] in flow
+        dim_product[Manufacturer] = "MARS WRIGLEY CONFECTIONERY US LLC" --replaced with item)?['Manufacturer'] in flow
+    ),
+    ([#KPI_1] + [#KPI_4] <> BLANK()) && [#UnitSales] <> BLANK() && [#UnitSalesYA] <> BLANK()
+)
+ORDER BY dim_geography[geography] ASC, dim_product[Manufacturer] ASC, dim_product[Brand] ASC`;
+
+document.getElementById('dax-block').textContent = daxSource;
+hljs.highlightElement(document.getElementById('dax-block'));
+</script>
+
+</body>
+</html>
