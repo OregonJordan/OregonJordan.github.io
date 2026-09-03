@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL Examples — Jordan Herring</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/nord.min.css">
+<style>
+  :root {
+    --bg: #12181f;
+    --bg-raised: #1a222b;
+    --text: #edeff2;
+    --text-dim: #9aa4b0;
+    --accent: #e8a33d;
+    --border: #2a323c;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.6;
+  }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+
+  a.back {
+    display: inline-block;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  a.back:hover { color: var(--text); border-bottom-color: var(--text-dim); }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 40px;
+  }
+
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin: 0 0 10px;
+  }
+
+  .desc {
+    color: var(--text-dim);
+    margin: 0 0 14px;
+    max-width: 60ch;
+  }
+
+  .tech {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .tech span {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    padding: 3px 9px;
+    border-radius: 4px;
+  }
+
+  .example {
+    margin-bottom: 40px;
+  }
+
+  .example h2 {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--accent);
+    margin: 0 0 6px;
+  }
+
+  .example .platform {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin: 0 0 16px;
+  }
+
+  .query {
+    margin-bottom: 18px;
+  }
+
+  .query .label {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin: 0 0 6px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  pre {
+    background: var(--bg-raised) !important;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    margin: 0;
+  }
+
+  code.hljs {
+    background: transparent !important;
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1.6;
+  }
+
+  footer {
+    margin-top: 32px;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <a class="back" href="https://oregonjordan.github.io/">&larr; Back to portfolio</a>
+
+  <header>
+    <h1>SQL Examples</h1>
+    <p class="desc">A sample of SQL work spanning Databricks Spark SQL (used for Power BI semantic model validation against a Databricks gold medallion layer) and SQL Server Management Studio (SSMS) queries for retail sales reporting — joins, conditional aggregation, and division handling.</p>
+    <div class="tech"><span>SQL</span><span>Databricks</span><span>SSMS</span><span>Power BI</span></div>
+  </header>
+
+  <div class="example">
+    <h2>Example 1</h2>
+    <p class="platform">Databricks Spark SQL — Power BI semantic model validation</p>
+
+    <div class="query">
+      <p class="label">Joins, Conditions, Aggregate</p>
+      <pre><code class="language-sql" data-idx="0"></code></pre>
+    </div>
+    <div class="query">
+      <p class="label">Count Categories &amp; Super Categories</p>
+      <pre><code class="language-sql" data-idx="1"></code></pre>
+    </div>
+    <div class="query">
+      <p class="label">Count Fact Rows by Period</p>
+      <pre><code class="language-sql" data-idx="2"></code></pre>
+    </div>
+  </div>
+
+  <div class="example">
+    <h2>Example 2</h2>
+    <p class="platform">Databricks Spark SQL</p>
+
+    <div class="query">
+      <p class="label">Totals by Period</p>
+      <pre><code class="language-sql" data-idx="3"></code></pre>
+    </div>
+  </div>
+
+  <div class="example">
+    <h2>Example 3</h2>
+    <p class="platform">Databricks Spark SQL</p>
+
+    <div class="query">
+      <p class="label">Total Weekly Row Count by Week, Last 20 Weeks (Gold Layer)</p>
+      <pre><code class="language-sql" data-idx="4"></code></pre>
+    </div>
+  </div>
+
+  <div class="example">
+    <h2>Example 4</h2>
+    <p class="platform">SQL Server Management Studio (SSMS)</p>
+
+    <div class="query">
+      <p class="label">Simple Conditions</p>
+      <pre><code class="language-sql" data-idx="5"></code></pre>
+    </div>
+    <div class="query">
+      <p class="label">Alias</p>
+      <pre><code class="language-sql" data-idx="6"></code></pre>
+    </div>
+    <div class="query">
+      <p class="label">Joins</p>
+      <pre><code class="language-sql" data-idx="7"></code></pre>
+    </div>
+    <div class="query">
+      <p class="label">Simple Calculation</p>
+      <pre><code class="language-sql" data-idx="8"></code></pre>
+    </div>
+    <div class="query">
+      <p class="label">Division with Div/0 Handling using CASE WHEN</p>
+      <pre><code class="language-sql" data-idx="9"></code></pre>
+    </div>
+    <div class="query">
+      <p class="label">Joins, Conditions, Groups</p>
+      <pre><code class="language-sql" data-idx="10"></code></pre>
+    </div>
+  </div>
+
+  <footer>Viewing on GitHub Pages — read-only, no download.</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+<script>
+const queries = [
+String.raw`SELECT p.period_description,
+sum(dollar_sales),
+sum(dollar_sales_ya),
+sum(unit_sales),
+sum(unit_sales_ya),
+sum(rom_dollar_sales),
+sum(rom_dollar_sales_ya),
+sum(rom_unit_sales),
+sum(rom_unit_sales_ya),
+sum(mulo_rom_dollar_sales),
+sum(mulo_rom_dollar_sales_ya),
+sum(mulo_rom_unit_sales),
+sum(mulo_rom_unit_sales_ya)
+from dnap_cpg_sales_nghq_prod.gold_nghq_circana.reporting_view_fact_sales_aggregate as f
+JOIN dim_period as p ON p.period_key = f.period_key
+JOIN dim_product as i ON i.product_key = f.product_key
+JOIN dim_geography as g ON g.geography_key = f.geography_key
+group by p.period_description`,
+
+String.raw`SELECT
+COUNT(Distinct super_category),
+COUNT(Distinct category)
+FROM dnap_cpg_sales_nghq_prod.gold_nghq_nielsen.reporting_view_fact_sales_aggregate AS f
+JOIN dim_period AS p ON p.period_key = f.period_key
+JOIN dim_product as i ON i.product_key = f.product_key
+JOIN dim_geography as g ON g.geography_key = f.geography_key
+WHERE g.panel_pos = 'POS'
+AND p.period_type IS NOT NULL AND p.period_type <> 'Weekly' AND p.period_type <> 'Unknown'
+AND g.rso <> 'Albertsons'
+AND g.class <> 'Total US Drug'
+AND g.geography NOT LIKE 'Rem%'`,
+
+String.raw`SELECT
+CASE
+WHEN p.period_description LIKE 'Latest 4%' THEN CONCAT('1 ', p.period_description)
+WHEN p.period_description LIKE 'Latest 13%' THEN CONCAT('2 ', p.period_description)
+WHEN p.period_description LIKE 'Latest 26%' THEN CONCAT('3 ', p.period_description)
+WHEN p.period_description LIKE 'Latest 52%' THEN CONCAT('4 ', p.period_description)
+WHEN p.period_description LIKE '%YTD %' THEN CONCAT('5 ', p.period_description)
+ELSE p.period_description
+END AS period_short,
+COUNT(*) AS total_row_count
+from dnap_cpg_sales_nghq_prod.gold_nghq_nielsen.reporting_view_fact_sales_aggregate as f
+JOIN dim_period AS p ON p.period_key = f.period_key
+JOIN dim_product AS i ON i.product_key = f.product_key
+JOIN dim_geography AS g ON g.geography_key = f.geography_key
+WHERE g.panel_pos = 'POS'
+AND p.period_type IS NOT NULL AND p.period_type <> 'Weekly' AND p.period_type <> 'Unknown'
+AND g.rso <> 'Albertsons'
+AND g.class <> 'Total US Drug'
+AND g.geography NOT LIKE 'Rem%'
+GROUP BY
+CASE
+WHEN p.period_description LIKE 'Latest 4%' THEN CONCAT('1 ', p.period_description)
+WHEN p.period_description LIKE 'Latest 13%' THEN CONCAT('2 ', p.period_description)
+WHEN p.period_description LIKE 'Latest 26%' THEN CONCAT('3 ', p.period_description)
+WHEN p.period_description LIKE 'Latest 52%' THEN CONCAT('4 ', p.period_description)
+WHEN p.period_description LIKE '%YTD %' THEN CONCAT('5 ', p.period_description)
+ELSE p.period_description
+END
+ORDER BY period_short ASC;`,
+
+String.raw`SELECT
+CASE
+WHEN p.period_description LIKE 'Latest 4%' THEN CONCAT('1 ', p.period_description)
+WHEN p.period_description LIKE 'Latest 13%' THEN CONCAT('2 ', p.period_description)
+WHEN p.period_description LIKE 'Latest 26%' THEN CONCAT('3 ', p.period_description)
+WHEN p.period_description LIKE 'Latest 52%' THEN CONCAT('4 ', p.period_description)
+WHEN p.period_description LIKE '%YTD %' THEN CONCAT('5 ', p.period_description)
+ELSE p.period_description
+END AS period_short,
+ROUND(SUM(dollar_sales_in_retail_measurement_channel),0) as \`$ - RM Channel\`,
+ROUND(SUM(dollar_sales_in_retail_measurement_channel_ya),0) as \`$ YA - RM Channel\`,
+SUM(units_sold_in_retail_measurement_channel) as \`Units - RM Channel\`,
+SUM(units_sold_in_retail_measurement_channel_ya) as \`Units YA - RM Channel\`,
+ROUND(SUM(dollar_sales_in_retail_measurement_xaoc),0) as \`$ - RM xAOC\`,
+ROUND(SUM(dollar_sales_in_retail_measurement_xaoc_ya),0) as \`$ YA - RM xAOC\`,
+SUM(units_sold_in_retail_measurement_xaoc) as \`Units - RM xAOC\`,
+SUM(units_sold_in_retail_measurement_xaoc_ya) as \`Units YA - RM xAOC\`
+from dnap_cpg_sales_nghq_prod.gold_nghq_nielsen.reporting_view_fact_sales_aggregate as f
+JOIN dim_period AS p ON p.period_key = f.period_key
+JOIN dim_product AS i ON i.product_key = f.product_key
+JOIN dim_geography AS g ON g.geography_key = f.geography_key
+WHERE g.panel_pos = 'POS'
+AND p.period_type IS NOT NULL AND p.period_type <> 'Weekly' AND p.period_type <> 'Unknown'
+AND g.rso <> 'Albertsons'
+AND g.class <> 'Total US Drug'
+AND g.geography NOT LIKE 'Rem%'
+GROUP BY ALL
+ORDER BY period_short ASC;`,
+
+String.raw`SELECT
+p.period_description,
+COUNT(*) AS total_row_count
+FROM dnap_cpg_sales_nghq_prod.gold_nghq_nielsen.reporting_view_fact_sales_weekly AS f
+JOIN dim_period AS p ON p.period_key = f.period_key
+WHERE p.week_number BETWEEN 1 AND 20
+GROUP BY p.period_description
+ORDER BY p.period_description ASC;`,
+
+String.raw`SELECT *
+FROM [Bona].[Master].[dimItem]
+WHERE Country = 'US'
+AND (Surface IN ('HWF','STL') OR Offer = 'BONUS')
+AND ItemKey >= 140927
+ORDER BY ItemKey ASC`,
+
+String.raw`SELECT
+MIN(UnitSales) AS 'UnitSales',
+Category
+FROM [Bona].[Master].[factData] as f
+JOIN [Bona].Master.dimItem as i ON i.ItemKey = f.ItemKey
+GROUP BY Category`,
+
+String.raw`SELECT
+ds.DataSource,
+i.Category,
+SUM(UnitSales) AS 'Unit Sales'
+FROM [Bona].[Master].[factData] as f
+JOIN [Bona].Master.dimItem as i ON i.ItemKey = f.ItemKey
+JOIN Bona.Master.dimDataSource as ds ON ds.DataSourceKey = f.DataSourceKey
+JOIN Bona.Master.dimDate as d ON d.DateKey = f.DateKey
+WHERE d.Date BETWEEN '2020-01-01' AND '2022-01-01'
+GROUP BY ds.DataSource, i.Category
+ORDER BY ds.DataSource ASC, [Unit Sales] DESC`,
+
+String.raw`SELECT
+ds.DataSource,
+i.ItemDescription,
+SUM(f.UnitSales) AS 'Units',
+AVG(i.UnitCost) AS 'Average_Unit_Cost',
+SUM(f.UnitSales) * AVG(i.UnitCost) AS 'Total Cost'
+FROM [Bona].[Master].[factData] as f
+JOIN [Bona].Master.dimItem as i ON i.ItemKey = f.ItemKey
+JOIN Bona.Master.dimDataSource as ds ON ds.DataSourceKey = f.DataSourceKey
+JOIN Bona.Master.dimDate as d ON d.DateKey = f.DateKey
+WHERE d.Date BETWEEN '2020-01-01' AND '2022-01-01'
+GROUP BY ds.DataSource, i.ItemDescription
+ORDER BY ds.DataSource ASC`,
+
+String.raw`SELECT
+ds.DataSource,
+i.ItemDescription,
+SUM(RetailDollars) AS 'Dollars',
+SUM(f.UnitSales) AS 'Units',
+CASE
+ WHEN (SUM(RetailDollars) IS NULL OR SUM(f.UnitSales) IS NULL)
+OR (SUM(RetailDollars) = 0 OR SUM(f.UnitSales) = 0)
+THEN 0
+ ELSE SUM(RetailDollars)/SUM(f.UnitSales)
+ END AS Avg_Price
+FROM [Bona].[Master].[factData] as f
+JOIN [Bona].Master.dimItem as i ON i.ItemKey = f.ItemKey
+JOIN Bona.Master.dimDataSource as ds ON ds.DataSourceKey = f.DataSourceKey
+JOIN Bona.Master.dimDate as d ON d.DateKey = f.DateKey
+WHERE d.Date BETWEEN '2020-01-01' AND '2022-01-01'
+GROUP BY ds.DataSource, i.ItemDescription
+ORDER BY ds.DataSource ASC, Avg_Price DESC`,
+
+String.raw`SELECT
+d.Date,
+BilledQuantity
+FROM [ADV_Encompass].[KeurigDrPepper].[factDataAWG] f
+INNER JOIN [ADV_Encompass].[Master].[dimDate] d ON d.DateKey = f.DateKey
+INNER JOIN [ADV_Encompass].[Master].[dimStore] s ON s.StoreKey = f.StoreKey
+INNER JOIN [ADV_Encompass].[KeurigDrPepper].[dimItem_AWG] i ON i.ItemKey = f.ItemKey
+WHERE d.Date BETWEEN '03/01/2024' AND '05/10/2024'
+AND ItemCode = '0309641'
+AND EquityGroupCode IN ('1870','7538','7401')
+AND s.RptLvlFilter = 'INCLUDE'
+GROUP BY d.Date, BilledQuantity
+ORDER BY d.Date ASC`
+];
+
+document.querySelectorAll('code[data-idx]').forEach(el => {
+  const idx = parseInt(el.getAttribute('data-idx'), 10);
+  el.textContent = queries[idx];
+  hljs.highlightElement(el);
+});
+</script>
+
+</body>
+</html>
