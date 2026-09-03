@@ -342,9 +342,9 @@ FILTER(
         ),
         dim_geography[Class] = "RMA - Food",
         dim_period[period_type] = "13WTD",
-        dim_geography[csp] = "AdvAntage Hannaford Corp DC1", --replaced with item)?['RSO'] in flow
+        dim_geography[rso] = "...", --replaced with item)?['RSO'] in flow
         dim_geography[geography] = "Mid-Atlantic", --replaced with item)?['Geography'] in flow
-        dim_product[Manufacturer] = "MARS WRIGLEY CONFECTIONERY US LLC" --replaced with item)?['Manufacturer'] in flow
+        dim_product[Manufacturer] = "... CONFECTIONERY US LLC" --replaced with item)?['Manufacturer'] in flow
     ),
     ([#KPI_1] + [#KPI_4] <> BLANK()) && [#UnitSales] <> BLANK() && [#UnitSalesYA] <> BLANK()
 )
