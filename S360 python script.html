@@ -144,11 +144,11 @@ start_time_entire_process = time.time()
 start_time_data_splitting_process = time.time()
 
 # Step 2: Setup the paths and load the Clients data frame
-input_path = r"P:\SMARTeam\Jordan Herring\Test Stuff\Shopper360 Testing Folder\_MASTER IANs\IAN factsData"
-output_path = r"P:\SMARTeam\Jordan Herring\Test Stuff\Shopper360 Testing Folder\IAN Data"
-master_data_path = r"P:\SMARTeam\Jordan Herring\Test Stuff\Shopper360 Testing Folder\_MASTER IANs"
-client_file_path = r"P:\SMARTeam\Jordan Herring\Test Stuff\Shopper360 Testing Folder\PBI Files\client_list.xlsx"
-mexdata_path = r"P:\SMARTeam\Jordan Herring\Test Stuff\Shopper360 Testing Folder\MexData"
+input_path = r"...\Shopper360 Testing Folder\_MASTER IANs\IAN factsData"
+output_path = r"...\Shopper360 Testing Folder\IAN Data"
+master_data_path = r"P...\Shopper360 Testing Folder\_MASTER IANs"
+client_file_path = r"...\Shopper360 Testing Folder\PBI Files\client_list.xlsx"
+mexdata_path = r"...\Shopper360 Testing Folder\MexData"
 
 
 clients_df = pd.read_excel(client_file_path, sheet_name=0, usecols="A")
