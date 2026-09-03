@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Power BI Custom Theme — Jordan Herring</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/nord.min.css">
+<style>
+  :root {
+    --bg: #12181f;
+    --bg-raised: #1a222b;
+    --text: #edeff2;
+    --text-dim: #9aa4b0;
+    --accent: #e8a33d;
+    --border: #2a323c;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.6;
+  }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+
+  a.back {
+    display: inline-block;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  a.back:hover { color: var(--text); border-bottom-color: var(--text-dim); }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+  }
+
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin: 0 0 10px;
+  }
+
+  .desc {
+    color: var(--text-dim);
+    margin: 0 0 14px;
+    max-width: 60ch;
+  }
+
+  .tech {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .tech span {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    padding: 3px 9px;
+    border-radius: 4px;
+  }
+
+  .swatches {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .swatch {
+    width: 68px;
+  }
+
+  .swatch .block {
+    height: 44px;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+  }
+
+  .swatch .hex {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    margin-top: 6px;
+    text-align: center;
+  }
+
+  .swatch .label {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    text-align: center;
+    margin-top: 2px;
+  }
+
+  pre {
+    background: var(--bg-raised) !important;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    overflow-x: auto;
+    font-size: 0.82rem;
+  }
+
+  code.hljs {
+    background: transparent !important;
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1.6;
+  }
+
+  footer {
+    margin-top: 32px;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <a class="back" href="https://oregonjordan.github.io/">&larr; Back to portfolio</a>
+
+  <header>
+    <h1>Power BI Custom Theme</h1>
+    <p class="desc">A custom Power BI theme JSON — data color palette, semantic good/neutral/bad colors, and detailed visual style overrides for tables, matrices, slicers, and buttons.</p>
+    <div class="tech"><span>Power BI</span><span>JSON</span></div>
+  </header>
+
+  <div class="swatches" id="swatches"></div>
+
+  <pre><code class="language-json" id="code-block"></code></pre>
+
+  <footer>Viewing on GitHub Pages — read-only, no download.</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script>
+<script>
+const themeSource = String.raw`{
+  "name": "Power BI Theme Jordan",
+
+  "dataColors": [
+    "#14332D",
+    "#007B4E",
+    "#00C48D",
+    "#AFFFD7",
+    "#7348C6",
+    "#FF9527",
+    "#FFCF00",
+    "#FFF3E3"
+  ],
+
+  "firstLevelElements": "#007B4E",
+  "secondLevelElements": "#14332D",
+  "thirdLevelElements": "#007B4E",
+  "fourthLevelElements": "#00C48D",
+  "background": "#FFFFFF",
+  "secondaryBackground": "#FFFFFF",
+
+  "good": "#007B4E",
+  "neutral": "#FFCF00",
+  "bad": "#B81D13",
+
+  "visualStyles": {
+    "*": {
+      "*": {
+        "general" : [{
+					"responsive": true,
+					"keepLayerOrder": true
+				}],
+        "lockAspect": [{
+          "show": true
+        }],
+        "background": [{
+            "color": {"solid": {"color": "#FFFFFF"}},
+        	"transparency": 0
+          }],
+
+        "visualHeader":    [{
+                  "show": false
+                  }],
+
+        "grid":    [{
+                  "gridVertical": true,
+                  "gridVerticalColor": {"solid": {"color": "#E6E6E6"}},
+                  "gridVerticalWeight": 1,
+                  "gridHorizontal": true,
+                  "gridHorizontalColor": {"solid": {"color": "#E6E6E6"}},
+                  "gridHorizontalWeight": 1,
+                  "rowPadding": 2,
+                  "outlineColor": {"solid": {"color": "#999999"}},
+                  "outlineWeight": 2
+                  }],
+
+        "title":    [{
+						"show": false,
+                        "fontColor": {"solid": {"color": "#FFFFFF"}},
+						"background": {"solid": {"color": "#007B4E"}},
+						"alignment": "Center",
+						"fontSize": 10,
+						"fontFamily": "Arial",
+                        "titleWrap": false
+						}],
+
+        "columnHeaders": [{
+						"autoSizeColumnWidth": false,
+						"fontFamily": "Arial",
+						"fontSize": 8,
+						"alignment": "Center",
+						"wordWrap": true
+					  }],
+
+        "rowHeaders": [{
+                    "stepped": true,
+                    "steppedLayoutIndentation": 25,
+                    "wordWrap": false,
+                    "fontFamily": "Arial",
+                    "fontSize": 8,
+                    "showExpandCollapseButtons": true
+                    }],    
+
+        "values": [{
+                    "wordWrap": false,
+                    "fontFamily": "Arial",
+                    "fontSize": 8
+                    }]
+        }
+      },
+	
+    "pivotTable":
+		{"*":
+			{
+			"border": 	[{
+          "show": true,
+          "color": {"solid": {"color": "#B3B3B3"}},
+          "radius": 5
+          }],
+
+      "visualHeader":    [{
+                "show": true,
+                "showVisualInformationButton": false,
+                "showVisualWarningButton": false,
+                "showVisualErrorButton": false,
+                "showDrillRoleSelector": true,
+                "showDrillToggleButton": true,
+                "showDrillUpButton": true,
+                "showDrillDownLevelButton": true,
+                "showDrillDownExpandButton": true,
+                "showPinButton": false,
+                "showFocusModeButton": true,
+                "showFilterRestatementButton": false,
+                "showSeeDataLayoutToggleButton": false,
+                "showOptionsMenu": true,
+                "showTooltipButton": false
+                }]
+          }
+      },
+
+    "tableEx":
+  {"*":
+    {
+    "visualHeader":    [{
+              "show": true,
+              "showVisualInformationButton": false,
+              "showVisualWarningButton": false,
+              "showVisualErrorButton": false,
+              "showDrillRoleSelector": false,
+              "showDrillToggleButton": false,
+              "showDrillUpButton": false,
+              "showDrillDownLevelButton": false,
+              "showDrillDownExpandButton": false,
+              "showPinButton": false,
+              "showFocusModeButton": true,
+              "showFilterRestatementButton": false,
+              "showSeeDataLayoutToggleButton": false,
+              "showOptionsMenu": true,
+              "showTooltipButton": false
+              }]
+        }
+      },
+
+      "slicer":
+		{"*":
+			{
+        "selection":[{
+						"show": true,
+						"selectAllCheckboxEnabled": true
+						}],
+			"header":   [{
+						"show": true,
+            "fontFamily": "Arial",
+            "textSize": 8
+						}],
+			"numericInputStyle":[{
+						"fontSize": 8,
+						"fontFamily": "Arial"
+						}],
+			"date":[{
+            "fontFamily": "Arial",
+						"textSize": 8
+						}],
+			"items":    [{
+						"textSize": 8,
+						"fontFamily": "Arial"
+						}],
+			"border": 	[{
+          "show": true,
+          "color": {"solid": {"color": "#B3B3B3"}},
+          "radius": 2
+          }]
+			}
+		},
+
+    "actionButton": {
+			"*": {
+          "fill":[{
+              "show":true
+            },
+            {
+              "$id": "default",
+              "transparency": 0,
+              "fillColor": {"solid":{"color":"#FFFFFF"}}
+            },
+            {
+              "$id": "hover",
+              "transparency": 0,
+              "fillColor": {"solid":{"color":"#CCCCCC"}}
+            },
+            {
+              "$id": "selected",
+              "transparency": 0,
+              "fillColor": {"solid":{"color":"#CCCCCC"}}
+            }],
+
+        "text": [{
+              "show":true
+            },
+            {
+              "$id": "default",
+              "fontSize": 8,
+              "fontFamily": "Arial"
+            },
+            {
+              "$id": "hover",
+              "fontSize": 8,
+              "fontFamily": "Arial"
+            },
+            {
+              "$id": "selected",
+              "fontSize": 8,
+              "fontFamily": "Arial"
+          }]
+
+        }
+      }
+    }
+}`;
+
+document.getElementById('code-block').textContent = themeSource;
+hljs.highlightElement(document.getElementById('code-block'));
+
+const dataColors = ["#14332D","#007B4E","#00C48D","#AFFFD7","#7348C6","#FF9527","#FFCF00","#FFF3E3"];
+const semanticColors = [
+  { hex: "#007B4E", label: "good" },
+  { hex: "#FFCF00", label: "neutral" },
+  { hex: "#B81D13", label: "bad" }
+];
+
+const swatchWrap = document.getElementById('swatches');
+dataColors.forEach((hex, i) => {
+  const div = document.createElement('div');
+  div.className = 'swatch';
+  div.innerHTML = `<div class="block" style="background:${hex}"></div><div class="hex">${hex}</div><div class="label">data ${i + 1}</div>`;
+  swatchWrap.appendChild(div);
+});
+semanticColors.forEach(c => {
+  const div = document.createElement('div');
+  div.className = 'swatch';
+  div.innerHTML = `<div class="block" style="background:${c.hex}"></div><div class="hex">${c.hex}</div><div class="label">${c.label}</div>`;
+  swatchWrap.appendChild(div);
+});
+</script>
+
+</body>
+</html>
