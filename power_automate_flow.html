@@ -279,76 +279,76 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script>
 const daxSource = String.raw`KPI1 & KPI4 combined with thresholds
-1/30/26--KPI Thresholds are included inside calculation. modify as needed
 
+--KPI Thresholds are included inside calculation. modify as needed
 EVALUATE
 FILTER(
     CALCULATETABLE(
         ADDCOLUMNS(
             SUMMARIZECOLUMNS(
-                dim_geography[csp],
+                dim_geography[rso],
                 dim_geography[geography],
                 dim_product[Manufacturer],
                 dim_product[Brand]
             ),
             "#UnitSales", [Unit Sales],
             "#UnitSalesYA", [Unit Sales YA],
-
             --KPI1--
-            "#Unit%Chg13wks",
+            "#Unit%Chg13Wks",
             SWITCH(
                 TRUE(),
-                (CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 > -5 &&
+                (CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 > -5 && 
                 (CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 < 5, BLANK(),
                 CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))*100
             ),
-            "#Unit%Chg52wks",
+            "#Unit%Chg52Wks",
             SWITCH(
                 TRUE(),
-                (CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 > -5 &&
+                (CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 > -5 && 
                 (CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 < 5, BLANK(),
                 CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD"))*100
             ),
-            "#KPI_1",
+            "#KPI_1", 
             SWITCH(
                 TRUE(),
-                (CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 > -5 &&
+                (CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 > -5 && 
                 (CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 < 5, BLANK(),
-                CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD"))*100
-            ),
-
+                (CALCULATE( [Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE( [Unit Sales % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100
+            ),          
+    
             --KPI4--
-            "#13wk_UPSPWPctChg",
+            "#UPSW", [UPSPW],
+            "#13Wk_UPSPWPctChg", 
             SWITCH(
                 TRUE(),
-                (CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 > -3 &&
+                (CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 > -3 && 
                 (CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 < 3, BLANK(),
                 CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))*100
             ),
-            "#52wk_UPSPWPctChg",
+            "#52Wk_UPSPWPctChg",
             SWITCH(
                 TRUE(),
-                (CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 > -3 &&
+                (CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 > -3 && 
                 (CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 < 3, BLANK(),
                 CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD"))*100
             ),
             "#KPI_4",
             SWITCH(
                 TRUE(),
-                (CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 > -3 &&
+                (CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 > -3 && 
                 (CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100 < 3, BLANK(),
-                CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE([UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD"))*100
+                (CALCULATE( [UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "13WTD"))-CALCULATE( [UPSPW % Chg YA], FILTER(ALL(dim_period), dim_period[period_type] = "52WTD")))*100
             )
         ),
-        dim_geography[Class] = "RMA - Food",
+        dim_geography[class] = "…",
         dim_period[period_type] = "13WTD",
-        dim_geography[rso] = "...", --replaced with item)?['RSO'] in flow
-        dim_geography[geography] = "Mid-Atlantic", --replaced with item)?['Geography'] in flow
-        dim_product[Manufacturer] = "... CONFECTIONERY US LLC" --replaced with item)?['Manufacturer'] in flow
+        dim_geography[rso] = "… --replaced with item()?['RSO'] in flow
+        dim_geography[geography] = "…", --replaced with item()?['Geography'] in flow
+        dim_product[Manufacturer] = "…" --replaced with item()?['Manufacturer'] in flow
     ),
     ([#KPI_1] + [#KPI_4] <> BLANK()) && [#UnitSales] <> BLANK() && [#UnitSalesYA] <> BLANK()
 )
-ORDER BY dim_geography[geography] ASC, dim_product[Manufacturer] ASC, dim_product[Brand] ASC`;
+ORDER BY dim_geography[geography] ASC, dim_product[Manufacturer] ASC, dim_product[Brand] ASC;
 
   document.getElementById('dax-block').textContent = daxSource;
   hljs.highlightElement(document.getElementById('dax-block'));
